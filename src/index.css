@@ -8,6 +8,52 @@
 .rubic-scribble {
     font-family: 'Rubik Scribble', cursive;
   }
+
+  @keyframes blink {
+    0%, 100% {
+      width: 60%;
+      font-size: 23px;
+    }
+    50% {
+      width: 50%;
+      font-size: 15px;
+    }
+  }
+  
+  .crazy-donate-button {
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes slideInDown {
+    0% {
+      transform: translateY(-40%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-in-down {
+    animation: slideInDown 1s ease-out forwards;
+  }
+  
+  /* Line filling animation */
+  @keyframes fillLine {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  .line-animation {
+    animation: fillLine 2s ease forwards;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  }
+  
   
 
 @tailwind base;

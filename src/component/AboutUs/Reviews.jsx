@@ -1,15 +1,17 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import man from "../../images/man1.avif";
+
 
 const review = [
   {
-    Image: "./images/man1.avif",
+    Image: "../../images/man1.avif",
     descr: "Supporting NGOs through this platform has been an incredibly rewarding experience. It's easy to find causes that resonate with me.",
     Name: "Shinde ram"
   },
   {
-    Image: "./images/man2.avif",
+    Image: "../../images/man2.avif",
     descr: "This platform is a great way to connect with NGOs and support their causes. The process is seamless and trustworthy.",
     Name: "Ramesh Kumar"
   },
@@ -40,7 +42,7 @@ function Reviews() {
             >
               <div className="flex justify-center items-center h-auto  px-10">
                 <img
-                  src={rev.Image}
+                  src={man}
                   alt={rev.Name}
                   className="object-contain h-[50vh] w-[50vh] rounded-full  border-4 border-gray-300"
                 />

@@ -4,50 +4,69 @@ import { FaGoogle } from 'react-icons/fa';
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = data => {
-    // Handle login with email and password
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { email, password } = data;
+    
+    try {
+      const response = await fetch('http://localhost:8080/profile/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          email,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Login successful');
+        navigate('/account');
+      } else {
+        const errorMessage = await response.text();
+        console.error('Login failed:', errorMessage);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
-
   return (
-    <div className=" flex flex-col justify-center items-center h-[60%] md:h-screen w-full bg-gray-600 ">
-      
-      <div className="w-[90%] md:max-w-md bg-white px-6  py-4 rounded-lg shadow-md opacity-80">
-        <div className=' relative bottom-2 flex justify-end '>
-          <MdOutlineCancel className='text-red-800 h-8 w-10 cursor-pointer' onClick={()=>navigate('/')}/>
-          </div>
-        <h2 className="text-2xl font-bold text-center mb-8">Login to Your NGO Account</h2>
+    <div className="flex flex-col justify-center items-center h-screen w-full bg-gradient-to-r from-green-400 to-blue-500">
+      <div className="w-[90%] md:max-w-md bg-white shadow-lg rounded-lg p-6 opacity-90 ">
+        <div className='relative bottom-2 flex justify-end'>
+          <MdOutlineCancel className='text-red-600 h-8 w-8 cursor-pointer' onClick={() => navigate('/')} />
+        </div>
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Login to Your NGO Account</h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+            <label className="block text-gray-700 font-medium">Email</label>
             <input
               type="email"
               {...register('email', { required: 'Email is required' })}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
               placeholder="Enter your email"
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-700">Password</label>
+            <label className="block text-gray-700 font-medium">Password</label>
             <input
               type="password"
               {...register('password', { required: 'Password is required' })}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200"
               placeholder="Enter your password"
             />
             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
           </div>
 
-          <button type="submit" className="w-full bg-violet-600 text-white p-3 rounded-lg">
+          <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-lg shadow-md hover:bg-green-700 transition duration-200">
             Login
           </button>
         </form>
@@ -55,18 +74,17 @@ const Login = () => {
         <div className="my-2 flex justify-center items-center">
           <span className="text-gray-400">or</span>
         </div>
-          {/* Google Login Button */}
-          <div className="mb-4">
-                <button
-                  className="bg-blue-500 text-white py-4 px-4 rounded-lg flex items-center justify-center w-full"
-                >
-                  <FaGoogle className='me-2 text-white'/> Sign in with Google
-                </button>
-          </div>
+        {/* Google Login Button */}
+        <div className="mb-4">
+          <button
+            className="bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center w-full shadow-md hover:bg-blue-700 transition duration-200"
+          >
+            <FaGoogle className='mr-2 text-white' /> Sign in with Google
+          </button>
+        </div>
 
-
-        <p className="text-center mt-4">
-          Don't have an account? <a href="/signup" className="text-blue-500">Sign Up</a>
+        <p className="text-center mt-4 text-gray-600">
+          Don't have an account? <a href="/register/user" className="text-green-600 hover:underline">Sign Up</a>
         </p>
       </div>
     </div>

@@ -38,7 +38,7 @@ const Footer = () => {
           {/* Contact Information Section */}
           <div className="mb-6 md:mb-0">
             <h4 className="text-lg font-bold mb-2">Contact Us</h4>
-            <p className="text-sm mb-2">123 Charity Lane, Nonprofit City, USA</p>
+            <p className="text-sm mb-2">Modern Collage Department of Computer Science</p>
             <p className="text-sm mb-2">Email: contact@1saath.org</p>
             <p className="text-sm">Phone: (123) 456-7890</p>
           </div>

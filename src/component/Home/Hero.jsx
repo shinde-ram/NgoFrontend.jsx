@@ -3,6 +3,7 @@ import Rotate from './Rotate';
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import UserBtn from './UserBtn';
+import logoImg from "../../images/logo3.png";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ const Hero = () => {
       {/* Top section with logo and profile icon */}
       <div className="w-full flex justify-between p-4 absolute top-0 left-0 z-20">
         <img
-          src="./images/mainlogo.png"
+          src={logoImg}
           alt="Logo"
-          className="md:w-[20%] sm:w-[15%] w-[20%] sm:ms-20 mt-5 "
+          className="md:w-[10%] sm:w-[15%] w-[20%] sm:ms-20 mt-5 h-[20vh] "
         />
           <div className='flex justify-center items-center'>
         <div className="md:hidden me-4 ">
@@ -62,16 +63,16 @@ const Hero = () => {
       </div>
 
       {/* Main content area */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-between bg-black pt-[35%] md:pt-0">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-blue-400 via-purple-400 to-blue-400 pt-[35%] md:pt-0">
         {/* Left Side - NGO Info */}
         <div className="text-white flex flex-col justify-center items-center w-full sm:w-[80%] px-8 md:px-20 md:w-1/2">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:text-left">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:text-left text-purple-800">
             Empower Communities, Support NGOs
           </h1>
-          <p className="text-base md:text-lg mb-4 md:mb-6 md:text-left">
+          <p className="text-base md:text-lg mb-4 md:mb-6 md:text-left text-gray-800">
             Join our mission to make a difference. Learn about the NGOs we support, and find out how you can contribute to impactful causes.
           </p>
-          <p className="text-base md:text-lg md:text-left">
+          <p className="text-base md:text-lg md:text-left text-gray-800">
             Together, we can create a positive change in the world. Discover the stories of those who have already made a difference.
           </p>
         </div>
@@ -84,14 +85,14 @@ const Hero = () => {
         {/* Buttons for larger screens */}
         <div className="absolute right-[38%] bottom-7 z-10 hidden md:flex space-x-5">
           <button
-            onClick={() => navigate("/List")}
-            className="bg-yellow-400 text-black text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:bg-yellow-600 hover:scale-105"
+            onClick={() => navigate("/register/ngo")}
+            className="bg-sky-500 border-2 border-black text-black text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition transform  hover:scale-105 ease-in-out duration-500"
           >
             Register Your NGO
           </button>
           <button
             onClick={() => navigate("/List")}
-            className="bg-transparent border border-white text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:bg-yellow-600 hover:text-black hover:scale-105"
+            className="ease-in-out duration-500 bg-transparent border border-blue-300 text-black text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition transform hover:bg-sky-500 hover:border-black hover:scale-105"
           >
             View NGOs
           </button>
@@ -124,3 +125,7 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
+
+

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IoHome ,IoListSharp,IoNewspaperSharp,IoInformationCircle,IoTrophy} from "react-icons/io5";
 import { MdContactMail,MdAccountCircle  } from "react-icons/md";
+import mainlogo from "../images/logo3.png"
 
 const Header = () => {
   const location = useLocation();
@@ -11,11 +12,11 @@ const Header = () => {
 
   const navLinks = [
     { href: '/', label: 'Home', logo: IoHome },
-    { href: '/list', label: 'Lists' ,logo: IoListSharp},
+    { href: '/list', label: "NGO's" ,logo: IoListSharp},
     { href: '/events', label: 'Events',logo:IoNewspaperSharp },
     { href: '/about', label: 'About Us' ,logo:IoInformationCircle},
-    { href: '/impact', label: 'Our Impact' ,logo:IoTrophy},
-    { href: '/contact', label: 'Contact Us',logo:MdContactMail },
+    { href: '/ourimpact', label: 'Our Impact' ,logo:IoTrophy},
+    { href: '/contactus', label: 'Contact Us',logo:MdContactMail },
     {href : '/account', label :'Account', logo:MdAccountCircle },
   ];
 
@@ -24,7 +25,7 @@ const Header = () => {
       <div>
         {/* Logo */}
         <div className="flex items-center my-4 justify-center">
-          <img src="./images/mainlogo.png" alt="logo" className="w-[100%] rounded-lg" />
+          <img src={`${mainlogo}`} alt="logo" className="w-[60%] rounded-lg" />
         </div>
         <hr className="border-0 h-[1px] w-full bg-white" />
 

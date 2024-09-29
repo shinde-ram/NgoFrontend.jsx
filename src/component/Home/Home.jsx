@@ -3,6 +3,8 @@ import Header from '../Header';
 import {Hero , Worksteps} from './index'
 import ListTop from '../List/ListTop';
 import Footer from '../Footer';
+import visionImg from "../../images/collage.png";
+import CountNgo from './CountNgo';
 
 const Home = () => {
   const [showHeader, setShowHeader] = useState(false);
@@ -38,11 +40,12 @@ const Home = () => {
         <div className='flex flex-col items-center justify-center bg-gray-200 text-black'>
           <p className='md:text-6xl text-4xl trade-winds pt-6 font-bold text-center '>Our Vision</p>
           <hr className="border-0 h-[4px] w-2/3 mt-4 bg-gradient-to-r from-pink-500 to-yellow-500  " />
-          <img src='./images/collage.png' alt='collage image' className='md:p-10 md:w-2/3 w-full bg-red-300 my-5 shadow-xl ' />
+          <img src={visionImg} alt='collage image' className='md:p-10 md:w-2/3 w-full bg-red-300 my-5 shadow-xl ' />
           <hr className="border-0 h-[4px] w-2/3 mb-6 bg-gradient-to-r from-yellow-500 to-pink-500  " />
         </div>
         <hr className="border-0 h-[2px] w-full  bg-red-800" />
-        
+        <CountNgo/>
+        <hr className="border-0 h-[2px] w-full  bg-red-800" />
         <ListTop />
         <hr className="border-0 h-[3px] w-full  bg-red-800" />
         <Worksteps />
