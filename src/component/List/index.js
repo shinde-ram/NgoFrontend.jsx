@@ -4,4 +4,4 @@ import OneNgo from "./OneNgo";
 import ngos from "./NgoDetails";
 
 
-export {List , ListTop , OneNgo,ngos}
+export { List, ListTop, OneNgo, ngos }
