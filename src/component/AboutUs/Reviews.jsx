@@ -18,7 +18,7 @@ const review = [
   {
     Image: "./images/man1.avif",
     descr: "I've discovered so many amazing NGOs through this platform. It's a pleasure to contribute to such worthy causes.",
-    Name: "Priya Patel"
+    Name: "Chaudharii Dinesh"
   }
 ];
 

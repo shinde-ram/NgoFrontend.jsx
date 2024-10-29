@@ -18,6 +18,7 @@ import PaymentGateway from './component/Payment/PaymentGateway';
 import CountNgo from './component/Home/CountNgo';
 import EventRegister from './component/Forms/EventRegister';
 import OneEvent from './component/Event/OneEvent';
+import Account from './Account/Account';
 
 function App() {
   const location = useLocation();
@@ -48,6 +49,7 @@ function App() {
           <Route path='/countngo' element={<CountNgo/>}></Route>
           <Route path="/register/event" element={<EventRegister/>}></Route>
           <Route path="/events/:id" element={<OneEvent/>}></Route>
+          <Route path="/account" element={<Account/>}></Route>
 
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>

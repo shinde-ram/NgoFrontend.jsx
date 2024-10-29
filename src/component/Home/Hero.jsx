@@ -3,7 +3,7 @@ import Rotate from './Rotate';
 import { useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import UserBtn from './UserBtn';
-import logoImg from "../../images/logo3.png";
+import logoImg from "../../images/newlogo2.png";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Hero = () => {
         <img
           src={logoImg}
           alt="Logo"
-          className="md:w-[10%] sm:w-[15%] w-[20%] sm:ms-20 mt-5 h-[20vh] "
+          className="md:w-[10%] sm:w-[15%] w-[20%] sm:ms-20 mt-5 h-[20vh] border-2 border-black rounded-full "
         />
           <div className='flex justify-center items-center'>
         <div className="md:hidden me-4 ">

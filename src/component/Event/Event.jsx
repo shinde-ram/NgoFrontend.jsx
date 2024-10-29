@@ -8,34 +8,6 @@ import EventService from '../../Service/EventService';
 
 const Event = () => {
   const navigate = useNavigate();
-  // Sample events data
-  const events = [
-    {
-      id: 1,
-      title: 'Back-to-School Drive 2024',
-      description: 'A charity event aimed at providing school supplies to underprivileged children before the new school year.',
-      date: 'November 05,2024',
-      location: 'Community Center, Delhi',
-      image: "../../images/collage.png" // Placeholder image
-    },
-    {
-      id: 2,
-      title: 'Community Cleanup',
-      description: 'Help us clean up our local parks and streets to make our community a better place.Join us for an evening of fine dining, entertainment, and fundraising to support our mission.',
-      date: 'September 10, 2024',
-      location: 'Shivajinagr , Pune',
-      image: '../../images/eventbg.avif' // Placeholder image
-    },
-    {
-      id: 3,
-      title: 'Charity Run',
-      description: 'Participate in our annual charity run to raise funds for our various causes.Join us for an evening of fine dining, entertainment, and fundraising to support our mission.',
-      date: 'November 5, 2024',
-      location: 'Paral, Mumbai',
-      image: './images/charityRun.jpg' // Placeholder image
-    },
-  ];
-
   const [Events, setEvents] = useState([]);
 
   useEffect(() => {

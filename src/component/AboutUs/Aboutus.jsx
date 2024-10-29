@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaHandshake, FaLightbulb, FaShieldAlt } from 'react-icons/fa';
 import {Reviews} from './index'
-import mainlogoImg from "../../images/logo3.png";
+import mainlogoImg from "../../images/newlogo2.png";
 const AboutUs = () => {
   return (
     <section className="bg-gradient-to-r from-blue-100 to-blue-300 py-16 px-6 md:px-20">
@@ -11,7 +11,7 @@ const AboutUs = () => {
           <img
             src={mainlogoImg}
             alt="About Us"
-            className="rounded-xl object-cover w-2/3 h-full "
+            className="rounded-full object-cover w-2/3 h-full border-2 border-green-800 "
           />
         </div>
 

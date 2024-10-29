@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IoHome ,IoListSharp,IoNewspaperSharp,IoInformationCircle,IoTrophy} from "react-icons/io5";
 import { MdContactMail,MdAccountCircle  } from "react-icons/md";
-import mainlogo from "../images/logo3.png"
+import mainlogo from "../images/newlogo2.png"
 
 const Header = () => {
   const location = useLocation();
@@ -25,7 +25,7 @@ const Header = () => {
       <div>
         {/* Logo */}
         <div className="flex items-center my-4 justify-center">
-          <img src={`${mainlogo}`} alt="logo" className="w-[60%] rounded-lg" />
+          <img src={`${mainlogo}`} alt="logo" className="w-[80%] rounded-full border-2 border-black" />
         </div>
         <hr className="border-0 h-[1px] w-full bg-white" />
 

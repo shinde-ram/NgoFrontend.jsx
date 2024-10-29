@@ -20,7 +20,7 @@ function NgoFields() {
         fetchFields();
     }, [id]); // The effect runs whenever `id` changes
 
-    const baseImageURL = 'http://localhost:8080/field/getFieldImage/';
+    const baseImageURL = 'http://localhost:8080/Field/getFieldImage/';
 
     return (
         <div>
