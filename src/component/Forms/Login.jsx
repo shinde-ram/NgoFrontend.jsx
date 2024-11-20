@@ -10,31 +10,34 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     const { email, password } = data;
-    
+  
     try {
       const response = await fetch('http://localhost:8080/Profile/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        credentials: 'include', // Ensures cookies are sent and received for cross-origin requests
         body: new URLSearchParams({
           email,
           password,
         }),
       });
-
+  
       if (response.ok) {
         console.log('Login successful');
-        navigate('/account');
+        navigate('/account'); // Redirect to account page
       } else {
         const errorMessage = await response.text();
         console.error('Login failed:', errorMessage);
+        // Optional: display error message to the user if needed
       }
     } catch (error) {
       console.error('Error during login:', error);
+      // Optional: handle network errors or other unexpected issues
     }
   };
-
+  
   return (
     <div className="flex flex-col justify-center items-center h-screen w-full bg-gradient-to-r from-green-400 to-blue-500">
       <div className="w-[90%] md:max-w-md bg-white shadow-lg rounded-lg p-6 opacity-90 ">

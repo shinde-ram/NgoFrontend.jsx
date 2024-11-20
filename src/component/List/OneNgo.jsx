@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ScrollToTop from '../ScrollToTop';
 import NgoService from '../../Service/NgoService';
 import NgoFields from './NgoFields';
+import NgoReview from './NgoReview';
 
 function OneNgo() {
   const navigate = useNavigate()
@@ -110,6 +111,8 @@ function OneNgo() {
 
           </div>
         </div>
+        {/*add comments here*/}
+
       </div>
     </>
   );

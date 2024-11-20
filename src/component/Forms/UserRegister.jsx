@@ -66,6 +66,7 @@ function UserRegister() {
     if (step > 1) setStep(step - 1);
   };
 
+
   return (
     <>
       {isSuccess && <SuccessPopup who={"u"} />}
@@ -79,7 +80,7 @@ function UserRegister() {
             Empower Change with Us!
             Join hands with thousands of dedicated NGOs.
             Register today and unlock your path to creating a better world.</p>
-            <p className='text-lg mb-6'>Together, we can make an impact one step at a time!"</p>
+            <p className='text-lg mb-6'>Together, we can make an impact one step at a time!</p>
 
           
         </div>
@@ -217,6 +218,7 @@ function UserRegister() {
                 <button
                   type="submit"
                   className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
+                  onClick={handleSubmit}
                 >
                   Register User
                 </button>
