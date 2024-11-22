@@ -11,11 +11,11 @@
 
   @keyframes blink {
     0%, 100% {
-      width: 60%;
+      width: 100%;
       font-size: 23px;
     }
     50% {
-      width: 50%;
+      width: 85%;
       font-size: 15px;
     }
   }

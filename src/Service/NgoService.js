@@ -23,6 +23,26 @@ class NgoService {
     return axios.get(`${URL_PATH}/${id}`);
   }
 
+  //Submit the rating
+  submitRating(ngo_id, rating) {
+    return axios.post(`${URL_PATH}/NgoReview`, {
+        rating: rating,
+        ngo_id: ngo_id,  // Ensure ngo_id is passed
+    }, {
+      withCredentials: true, 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+}
+
+getAverageRating(ngoId) {
+  return axios.get(`${URL_PATH}/NgoReview/average/${ngoId}`);
+}
+
+  
+  
+
   // Optional: Add other methods for updating, deleting, etc.
   // Example for deleting an NGO
   // deleteNgo(id) {

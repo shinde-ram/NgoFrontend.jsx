@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaGoogle } from 'react-icons/fa';
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import UserService from '../../Service/UserService';
 
 const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+            const response = await UserService.accountAccess();
+            if(response){
+              navigate("/account");
+            }
+        } catch (error) {
+            console.log();
+        }
+    };
+
+    fetchUser();
+}, []);
+  
 
   const onSubmit = async (data) => {
     const { email, password } = data;

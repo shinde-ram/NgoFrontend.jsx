@@ -3,19 +3,22 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import ScrollToTop from '../ScrollToTop';
 import NgoService from '../../Service/NgoService';
 import NgoFields from './NgoFields';
-import NgoReview from './NgoReview';
+import StarRating from './StarRating';
 
 function OneNgo() {
   const navigate = useNavigate()
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [imageSrc, setImageSrc] = useState(null); // State for image source
+  const [averageRating, setAverageRating] = useState(null);
 
   useEffect(() => {
     const fetchNgo = async () => {
       try {
         const response = await NgoService.getNgoById(id);
         setNgo(response.data);
+        const response2 = await NgoService.getAverageRating(id);
+        setAverageRating(response2.data);
 
         // Fetch the image
         const imageResponse = await NgoService.getImage(id);
@@ -62,7 +65,7 @@ function OneNgo() {
 
               <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center text-center justify-center transform hover:scale-105 transition duration-300 ease-in-out">
                 <h4 className="text-xl font-semibold text-gray-700 ">Rating</h4>
-                <p className="text-2xl font-bold text-yellow-500 mt-2 ">{ngo.rating}</p>
+                <p className="text-2xl font-bold text-yellow-500 mt-2 ">{averageRating}</p>
               </div>
             </div>
             <div className='flex flex-col gap-4 justify-center items-center'>
@@ -82,7 +85,7 @@ function OneNgo() {
 
               <button
               onClick={()=>navigate(`/paymentgateway/${ngo.ngo_id}`)}
-               className="crazy-donate-button whitespace-nowrap bg-red-500 text-white font-bold py-3 px-3 md:px-6 rounded-full shadow-lg text-xl w-full">
+               className="crazy-donate-button whitespace-nowrap bg-red-500 text-white font-bold py-3 px-3 md:px-6 rounded-full shadow-lg text-xl ">
               💰Donate Now
               </button>
 
@@ -90,13 +93,12 @@ function OneNgo() {
 
           </div>
         </div>
-
+        <StarRating ngo_Id={ngo.ngo_id} />
         <div className="mt-8">
           <p className="text-xl text-gray-700 w-full md:">
             {ngo.description}
           </p>
         </div>
-
         <NgoFields />
 
         <div className="mt-12 flex justify-center">
