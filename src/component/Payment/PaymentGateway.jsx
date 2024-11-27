@@ -60,6 +60,8 @@ function PaymentGateway() {
                   user_id:donar.user_id,
                   recipient_id:ngo.ngo_id,
                   amount:donationAmount,
+                  email:donar.email,
+                  NgoName:ngo.name,
                 }),                
               })
                 .then((data) => {
