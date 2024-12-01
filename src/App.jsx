@@ -18,7 +18,12 @@ import PaymentGateway from './component/Payment/PaymentGateway';
 import CountNgo from './component/Home/CountNgo';
 import EventRegister from './component/Forms/EventRegister';
 import OneEvent from './component/Event/OneEvent';
-import Account from './Account/Account';
+import UserDashboard from './component/Account/UserDashboard';
+import NgoDashboard from './component/Account/NgoDashboard';
+import EventEdit from './component/Account/EventEdit';
+import EditProfile from './component/Account/EditProfile';
+import EditRelatedField from './component/Account/EditRelatedField';
+import ViewDonation from './component/Account/ViewDonation';
 
 function App() {
   const location = useLocation();
@@ -49,7 +54,13 @@ function App() {
           <Route path='/countngo' element={<CountNgo/>}></Route>
           <Route path="/register/event" element={<EventRegister/>}></Route>
           <Route path="/events/:id" element={<OneEvent/>}></Route>
-          <Route path="/account" element={<Account/>}></Route>
+          <Route path="/account/user/:id" element={<UserDashboard/>}></Route>
+          <Route path="/account/ngo/:id" element={<NgoDashboard/>}></Route>
+          <Route path={`/ngo/:id/events`} element={<EventEdit/>}></Route>
+          <Route path={`/ngo/edit-profile/:id`} element={<EditProfile/>}></Route>
+          <Route path={`/ngo/related-fields/:id`} element={<EditRelatedField/>}></Route>
+          <Route path={`/ngo/donations/:id`} element={<ViewDonation/>}></Route>
+
 
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>

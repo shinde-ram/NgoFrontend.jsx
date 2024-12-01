@@ -17,7 +17,7 @@ const Header = () => {
     { href: '/about', label: 'About Us' ,logo:IoInformationCircle},
     { href: '/ourimpact', label: 'Our Impact' ,logo:IoTrophy},
     { href: '/contactus', label: 'Contact Us',logo:MdContactMail },
-    {href : '/account', label :'Account', logo:MdAccountCircle },
+    {href : '/login', label :'Account', logo:MdAccountCircle },
   ];
 
   return (
