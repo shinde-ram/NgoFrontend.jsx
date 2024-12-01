@@ -36,6 +36,8 @@ function OneNgo() {
     return <p className="text-center text-red-500">NGO not found</p>;
   }
 
+
+
   return (
     <>
       <ScrollToTop />
@@ -83,7 +85,9 @@ function OneNgo() {
               }
              
 
+              {/*()=>navigate(`/paymentgateway/${ngo.ngo_id}`)*/}
               <button
+
               onClick={()=>navigate(`/paymentgateway/${ngo.ngo_id}`)}
                className="crazy-donate-button whitespace-nowrap bg-red-500 text-white font-bold py-3 px-3 md:px-6 rounded-full shadow-lg text-xl ">
               💰Donate Now

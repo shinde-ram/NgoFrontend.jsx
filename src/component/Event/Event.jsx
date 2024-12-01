@@ -38,7 +38,7 @@ const Event = () => {
               <h2 className="text-2xl font-semibold mb-2">{event.title}</h2>
               <p className="text-gray-600 mb-4 line-clamp-4">{event.description}</p>
               <p className="text-red-500">{event.date} <span>{false ? "To" : " "}</span></p>
-              <p className="text-blue-800 mb-4">{event.location}</p>
+              <p className="text-blue-800 mb-4">{event.venue}</p>
               <div className='flex justify-end items-end '>
                 <button
                   onClick={() => navigate(`/events/${event.event_id}`)}
