@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import EventService from '../../Service/EventService';
+import { useNavigate } from 'react-router-dom';
 
 function AddEvent({ ngoId }) {
+  const navigate = useNavigate();
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -9,11 +11,12 @@ function AddEvent({ ngoId }) {
     venue: '',
     fees: '',
     poster: null,
-    schedule: [],
+    schedule: []
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name+" name and value  "+value)
     setEventData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -49,12 +52,21 @@ function AddEvent({ ngoId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("\nNgo id is "+ngoId);
       const formData = new FormData();
-      formData.append('newEvent', JSON.stringify(eventData));
+      formData.append('title', eventData.title);
+      formData.append('description', eventData.description);
+      formData.append('location_link', eventData.location_link);
+      formData.append('venue', eventData.venue);
+      formData.append('fees', eventData.fees);
+      formData.append('schedule', JSON.stringify(eventData.schedule));
       formData.append('poster', eventData.poster);  
-      console.log(eventData);
-      const response = await EventService.addEvent(ngoId, formData);
+      formData.append('ngo_id', ngoId);  
+      console.log("Event before sending :- ",eventData);
+      const response = await EventService.addEvent(formData);
       console.log('Event Created:', response.data);
+      alert("Event Created Successfully :)");
+      navigate("/events");
     } catch (error) {
       console.error('Error creating event:', error);
     }
@@ -164,13 +176,13 @@ function AddEvent({ ngoId }) {
               <input
                 type="time"
                 value={schedule.start_time}
-                onChange={(e) => handleScheduleChange(index, 'start_time', e.target.value)}
+                onChange={(e) => handleScheduleChange(index, 'start_time', e.target.value + ':00')}
                 className="w-1/3 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
               />
               <input
                 type="time"
                 value={schedule.end_time}
-                onChange={(e) => handleScheduleChange(index, 'end_time', e.target.value)}
+                onChange={(e) => handleScheduleChange(index, 'end_time', e.target.value + ':00')}
                 className="w-1/3 p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -187,6 +199,7 @@ function AddEvent({ ngoId }) {
         {/* Submit Button */}
         <div className="mb-6">
           <button
+            onClick={handleSubmit}
             type="submit"
             className="w-full bg-blue-600 text-white font-semibold p-3 rounded-md shadow-md hover:bg-blue-700 focus:outline-none"
           >

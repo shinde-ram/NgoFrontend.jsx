@@ -16,7 +16,6 @@ import UserRegister from './component/Forms/UserRegister';
 import OneNgoField from './component/List/OneNgoField';
 import PaymentGateway from './component/Payment/PaymentGateway';
 import CountNgo from './component/Home/CountNgo';
-import EventRegister from './component/Forms/EventRegister';
 import OneEvent from './component/Event/OneEvent';
 import UserDashboard from './component/Account/UserDashboard';
 import NgoDashboard from './component/Account/NgoDashboard';
@@ -52,7 +51,7 @@ function App() {
           <Route path={`/list/ngofield/:id`} element={<OneNgoField/>}></Route>
           <Route path='/paymentgateway/:id' element={<PaymentGateway/>}></Route>
           <Route path='/countngo' element={<CountNgo/>}></Route>
-          <Route path="/register/event" element={<EventRegister/>}></Route>
+          {/* <Route path="/register/event" element={<EventRegister/>}></Route> */}
           <Route path="/events/:id" element={<OneEvent/>}></Route>
           <Route path="/account/user/:id" element={<UserDashboard/>}></Route>
           <Route path="/account/ngo/:id" element={<NgoDashboard/>}></Route>

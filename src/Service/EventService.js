@@ -5,8 +5,8 @@ const URL_PATH = "http://localhost:8080/Events";
 class EventService {
 
   // Method to create a new event
-  addEvent(ngoId, formData) { 
-     return axios.post(`${URL_PATH}/${ngoId}/add-event`, formData, {
+  addEvent(formData) { 
+     return axios.post(`${URL_PATH}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -26,6 +26,10 @@ class EventService {
   // Fetch the poster image of a specific event
   getImage(id) {
     return axios.get(`${URL_PATH}/getPosterimage/${id}`, { responseType: 'blob' });
+  }
+
+  getAllEvent(){
+    return axios.get(`${URL_PATH}`);    
   }
 }
 
