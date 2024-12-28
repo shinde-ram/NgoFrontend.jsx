@@ -1,58 +1,88 @@
-import React from 'react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import man from "../../images/man1.avif";
-
-
-const review = [
-  {
-    Image: "../../images/man1.avif",
-    descr: "Supporting NGOs through this platform has been an incredibly rewarding experience. It's easy to find causes that resonate with me.",
-    Name: "Shinde ram"
-  },
-  {
-    Image: "../../images/man2.avif",
-    descr: "This platform is a great way to connect with NGOs and support their causes. The process is seamless and trustworthy.",
-    Name: "Ramesh Kumar"
-  },
-  {
-    Image: "./images/man1.avif",
-    descr: "I've discovered so many amazing NGOs through this platform. It's a pleasure to contribute to such worthy causes.",
-    Name: "Chaudharii Dinesh"
-  }
-];
+import React, { useEffect, useState } from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import axios from "axios";
+import UserService from "../../Service/UserService";
+import NgoService from "../../Service/NgoService";
 
 function Reviews() {
+  const [reviews, setReviews] = useState([]); // State to store fetched reviews
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        // Fetch the reviews from the backend
+        const response = await axios.get("http://localhost:8080/AboutReview");
+
+        // Fetch additional user data (e.g., user name and profile image) for each review
+        const reviewsWithUserDetails = await Promise.all(
+          response.data.map(async (review) => {
+            if (review.userId) {
+              const user = await UserService.getUserById(review.userId);
+              return {
+                descr: review.content, // Review content
+                Name: user.data.name, // User's name
+                Image: `http://localhost:8080/Profile/getprofileimage/${review.userId}`
+              };
+            } else if (review.ngoId) {
+              const ngo = await NgoService.getNgoById(review.ngoId);
+              return {
+                descr: review.content, // Review content
+                Name: ngo.data.name, // User's name
+                Image: `http://localhost:8080/getprofileimage/${review.ngoId}`
+              };
+            }
+            return review; // In case userId is not present, return the review as is
+          })
+        );
+
+        setReviews(reviewsWithUserDetails); // Update state with fetched reviews
+      } catch (error) {
+        console.error("Error fetching reviews:", error);
+      }
+    };
+
+    fetchReviews();
+  }, []);
+
   return (
-    <div className="bg-blue-100 py-10 ">
-      <div className="container mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-8">What Donors Are Saying</h2>
+    <div className="xl:mt-6 py-10">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-800">
+          What Donors Are Saying
+        </h2>
         <Carousel
           infiniteLoop={true}
           showStatus={false}
           autoPlay={true}
-          interval={5000}
+          interval={3000}
           stopOnHover={false}
-          transitionTime={800}
+          transitionTime={1000}
+          showIndicators={false}
+          showThumbs={false}
         >
-          {review.map((rev, index) => (
+          {reviews.map((rev, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row w-full h-[60vh]  justify-center items-center px-52"
+              className="flex flex-col md:flex-row justify-center items-center px-4 md:px-20 lg:px-32"
             >
-              <div className="flex justify-center items-center h-auto  px-10">
+              <div className="flex justify-center items-center mb-6 md:mb-0 md:mr-16 w-[40%]">
                 <img
-                  src={man}
+                  src={`${rev.Image}`}
                   alt={rev.Name}
-                  className="object-contain h-[50vh] w-[50vh] rounded-full  border-4 border-gray-300"
+                  className="h-[150px] w-[150px] md:h-[200px] md:w-[200px] lg:h-[350px] lg:max-w-[250px] rounded-full object-cover "
                 />
               </div>
 
-              <div className="w-full md:w-3/2 flex flex-col justify-center items-center md:px-4">
-                <p className="text-gray-700 text-center text-xl italic mb-4">
+
+              {/* Text Section */}
+              <div className="flex flex-col items-center md:items-start text-center md:text-left w-[60%]">
+                <p className="text-gray-700 text-lg md:text-xl italic mb-4 line-clamp-3 md:line-clamp-none">
                   {rev.descr}
                 </p>
-                <p className="text-center text-gray-900 font-bold">— {rev.Name}</p>
+                <p className="text-gray-900 font-bold text-base md:text-lg">
+                  — {rev.Name}
+                </p>
               </div>
             </div>
           ))}

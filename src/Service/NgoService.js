@@ -11,6 +11,10 @@ class NgoService {
   getImage(id) {
     return axios.get(`${URL_PATH}/getprofileimage/${id}`, { responseType: 'blob' });
   }
+
+  getCount(){
+    return axios.get(`${URL_PATH}/count`);
+  }
   
 
   // Create a new NGO (handle file uploads)

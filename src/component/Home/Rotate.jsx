@@ -23,7 +23,7 @@ const Rotate = () => {
         <div className="absolute w-full h-full rounded-full bg-gradient-to-r from-blue-900 via-blue-500 to-sky-300"></div>
 
         {/* Small Circle */}
-        <div className="absolute w-[97%] left-[3%] bottom-[1.5%] h-[97%] rounded-full bg-gradient-to-tr from-purple-400 to-blue-400 z-5"></div>
+        <div className="absolute w-[97%] left-[3%] bottom-[1.5%] h-[97%] rounded-full bg-gradient-to-tr from-blue-500 to-blue-500 z-5"></div>
 
         {/* Big Circle Items */}
         {navItemsBig.map((item, index) => {

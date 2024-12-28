@@ -63,10 +63,11 @@ const Hero = () => {
       </div>
 
       {/* Main content area */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-blue-400 via-purple-400 to-blue-400 pt-[35%] md:pt-0">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-blue-500 via-blue-500 to-blue-500 pt-[35%] md:pt-0">
         {/* Left Side - NGO Info */}
+        
         <div className="text-white flex flex-col justify-center items-center w-full sm:w-[80%] px-8 md:px-20 md:w-1/2">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:text-left text-purple-800">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 md:text-left text-black">
             Empower Communities, Support NGOs
           </h1>
           <p className="text-base md:text-lg mb-4 md:mb-6 md:text-left text-gray-800">

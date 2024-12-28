@@ -3,17 +3,14 @@ import { useParams } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Carousel CSS
 import NgoFieldService from '../../Service/NgoFieldService';
-import NgoService from '../../Service/NgoService';
 
 function OneNgoField() {
     const { id } = useParams(); // Get the field id from the URL
     const [field, setField] = useState(null);
-    const [images, setImages] = useState([]);
 
-    const baseImageURL = 'http://localhost:8080/field/getFieldImage/';
+    const baseImageURL = 'http://localhost:8080/Field/getFieldImage/';
 
     useEffect(() => {
-        
         const fetchField = async () => {
             try {
                 // Fetch the field details by field_id

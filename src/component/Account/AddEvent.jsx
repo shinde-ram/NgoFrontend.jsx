@@ -16,7 +16,6 @@ function AddEvent({ ngoId }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name+" name and value  "+value)
     setEventData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -59,12 +58,11 @@ function AddEvent({ ngoId }) {
       formData.append('location_link', eventData.location_link);
       formData.append('venue', eventData.venue);
       formData.append('fees', eventData.fees);
+      console.log(eventData.schedule);
       formData.append('schedule', JSON.stringify(eventData.schedule));
       formData.append('poster', eventData.poster);  
       formData.append('ngo_id', ngoId);  
-      console.log("Event before sending :- ",eventData);
-      const response = await EventService.addEvent(formData);
-      console.log('Event Created:', response.data);
+      EventService.addEvent(formData);
       alert("Event Created Successfully :)");
       navigate("/events");
     } catch (error) {
@@ -130,21 +128,6 @@ function AddEvent({ ngoId }) {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
             placeholder="Enter venue"
-            required
-          />
-        </div>
-
-        {/* Event Fees */}
-        <div className="mb-4">
-          <label htmlFor="fees" className="block text-sm font-semibold text-gray-700 mb-2">Event Fees</label>
-          <input
-            type="number"
-            id="fees"
-            name="fees"
-            value={eventData.fees}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter event fees"
             required
           />
         </div>

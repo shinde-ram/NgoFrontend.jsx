@@ -10,13 +10,19 @@ class UserService {
   }
   
   accountAccess = async () => {
-    const response = await fetch('http://localhost:8080/Profile/account', {
-      method: 'GET',
-      credentials: 'include', // Important for sending cookies
-    });
-    console.log(response);
-    return response.json();
-};
+    try {
+      const response = await axios.get('http://localhost:8080/Profile/account', {
+        withCredentials: true, // Include cookies with the request
+      });
+      return response.data; // Return the parsed JSON directly
+    } catch (error) {
+      console.error('Error accessing account:', error.message);
+      if (error.response) {
+        console.error('Response data:', error.response.data); // Log error response from server
+      }
+      throw error; // Re-throw the error to handle it in the calling code
+    }
+  };
 
   createUser = (formData) =>{
     return axios.post(URL_PATH,formData);

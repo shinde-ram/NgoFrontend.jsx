@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaHandsHelping, FaUsers } from 'react-icons/fa';
 import Confetti from 'react-confetti'; // Import the confetti library
+import NgoService from '../../Service/NgoService';
 
 const CountNgo = () => {
   const [ngoCount, setNgoCount] = useState(0);
   const [userCount, setUserCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [count , setCount] =useState(0);
   const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
   const ref = useRef();
 
@@ -42,10 +44,20 @@ const CountNgo = () => {
     };
   }, []);
 
+  
+  useEffect(()=>{
+    fetch=async()=>{
+
+      const dd =await NgoService.getCount();
+      setCount(dd.data);
+    }
+    fetch();
+  },[])
+
   useEffect(() => {
     if (isVisible) {
-      animateValue(0, 200, 2000, setNgoCount);
-      animateValue(0, 100, 2000, setUserCount);
+      animateValue(0, 100, 2000, setNgoCount);
+      animateValue(0, 200, 2000, setUserCount);
     }
   }, [isVisible]);
 
@@ -59,7 +71,7 @@ const CountNgo = () => {
   }, []);
 
   return (
-    <div ref={ref} className="bg-gradient-to-br from-gray-100 to-gray-300 flex flex-col md:flex-row items-center justify-center py-16 w-full relative">
+    <div ref={ref} className=" bg-gradient-to-br from-gray-100 to-gray-300 flex flex-col md:flex-row items-center justify-center py-16 ">
       {/* Confetti Celebration Effect */}
       {isVisible && (
         <Confetti

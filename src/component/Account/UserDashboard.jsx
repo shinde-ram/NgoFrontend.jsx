@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import NgoService from "../../Service/NgoService";  // Assume you have a service to fetch NGO details
 import UserService from "../../Service/UserService";
+import axios from "axios";
 
 const NgoDashboard = () => {
   const [userDetails, setuserDetails] = useState(null);
@@ -51,20 +52,20 @@ const NgoDashboard = () => {
     if (!confirmLogout) return;
 
     try {
-      const response = await fetch("http://localhost:8080/Profile/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const response = await axios.post(
+        "http://localhost:8080/Profile/logout",
+        null, // No body is required for this request
+        {
+          withCredentials: true, // Send cookies/session data with the request
+        }
+      );
+      console.log(response.data); // Logs the response message ("Logged out successfully")
+      navigate("/");  // Redirect to homepage after logout
 
-      if (response.ok) {
-        console.log("Logged out successfully");
-        navigate("/");  // Redirect to homepage after logout
-      } else {
-        console.error("Failed to log out");
-      }
     } catch (error) {
       console.error("Error during logout:", error);
     }
+
   };
 
   // Function to handle profile image click (opens modal)
@@ -109,19 +110,13 @@ const NgoDashboard = () => {
 
         {/* NGO Details in Full Width */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
-          {[ 
+        {console.log(userDetails.updated_at.split(" ")[0])}
+        {[ 
             { label: "Email", value: userDetails.email },
             { label: "Phone", value: userDetails.phone },
             { label: "Aadhar Number", value: userDetails.adhar_no },
             { label: "NGO ID", value: userDetails.user_id },
-            { 
-              label: "Date of Registration", 
-              value: new Date(userDetails.created_at).toLocaleString() 
-            },
-            { 
-              label: "Last Updated", 
-              value: new Date(userDetails.updated_at).toLocaleString() 
-            },
+            
           ].map((detail, index) => (
             <NgoDetailCard key={index} label={detail.label} value={detail.value} />
           ))}

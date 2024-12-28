@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import Img from "../../images/collage.png";
-import Img2 from "../../images/pineventbg.webp";
 import BgImg from "../../images/pineventbg.webp";
 import { useNavigate } from 'react-router-dom';
 import EventService from '../../Service/EventService';
@@ -31,7 +29,6 @@ const Event = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Events.map(event => (
           <div key={event.id} className="bg-white rounded-lg shadow-lg overflow-hidden border-4 border-gray-700">
-            {console.log(`"${baseImageURL}${event.event_id}"`)}
             <img src={`${baseImageURL}${event.event_id}`} alt={event.title} className="w-full h-48 object-cover" />
             <hr className="h-1 w-full bg-red-400 mt-3" />
             <div className="p-6">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import NgoService from "../../Service/NgoService";
+import axios from "axios";
 
 const NgoDashboard = () => {
     const navigate = useNavigate();
@@ -55,20 +56,19 @@ const NgoDashboard = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://localhost:8080/Profile/logout", {
-                method: "POST",
-                credentials: "include",
-            });
-
-            if (response.ok) {
-                console.log("Logged out successfully");
-                navigate("/");
-            } else {
-                console.error("Failed to log out");
-            }
-        } catch (error) {
+            const response = await axios.post(
+              "http://localhost:8080/Profile/logout",
+              null, // No body is required for this request
+              {
+                withCredentials: true, // Send cookies/session data with the request
+              }
+            );
+            console.log(response.data); // Logs the response message ("Logged out successfully")
+            navigate("/");  // Redirect to homepage after logout
+      
+          } catch (error) {
             console.error("Error during logout:", error);
-        } finally {
+          } finally {
             setShowLogoutModal(false); // Close the modal
         }
     };

@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import UserService from "../../Service/UserService";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ const Login = () => {
     const fetchUser = async () => {
       try {
         const response = await UserService.accountAccess();
+        console.log(response);
         if (response) {
-          console.log("Account details:", response);
           if (response.role === "user") {
             navigate(`/account/user/${response.id}`);
           } else if (response.role === "ngo") {
@@ -38,22 +39,25 @@ const Login = () => {
     const { email, password, role } = data;
 
     try {
-      const response = await fetch("http://localhost:8080/Profile/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        credentials: "include", // Include cookies for session management
-        body: new URLSearchParams({
+      const response = await axios.post(
+        "http://localhost:8080/Profile/login",
+        new URLSearchParams({
           email,
           password,
-          role, // Include role in the request body
+          role,
         }),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Login successful wow:", result);
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(response);  
+      if (response.status) {
+        console.log("Login successful wow:", response.data);
+        const result = response.data;
+        console.log(result);
 
         // Redirect based on role
         if (result.role === "user") {
@@ -62,9 +66,7 @@ const Login = () => {
           navigate(`/account/ngo/${result.id}`);
         }
       } else {
-        const errorMessage = await response.json();
-        console.error("Login failed:", errorMessage.error);
-        alert("Login failed: " + errorMessage.error);
+        alert("Login failed: ");
       }
     } catch (error) {
       console.error("Error during login:", error);
