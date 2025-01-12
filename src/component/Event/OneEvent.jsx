@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EventService from "../../Service/EventService";
 import UserService from "../../Service/UserService";
+import MapDisplay from "./MapDisplay";
 
 function OneEvent() {
   const { id } = useParams(); // Event ID from the URL
@@ -144,6 +145,7 @@ function OneEvent() {
             </a>
           </p>
           <p className="text-gray-700 text-lg mt-4">{event.description}</p>
+          <MapDisplay mapLink={event.location_link}/>
         </div>
 
         {/* Terms and Conditions Modal */}

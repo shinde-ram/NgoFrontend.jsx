@@ -20,10 +20,10 @@ const Rotate = () => {
     <div className="w-full h-screen relative overflow-hidden justify-end items-center hidden md:flex">
       <div className="relative w-[30em] h-[30em] transform translate-x-[60%]">
         {/* Big Circle */}
-        <div className="absolute w-full h-full rounded-full bg-gradient-to-r from-blue-900 via-blue-500 to-sky-300"></div>
+        <div className="absolute w-full h-full rounded-full bg-gradient-to-r from-blue-900 via-purple-600 to-sky-300"></div>
 
         {/* Small Circle */}
-        <div className="absolute w-[97%] left-[3%] bottom-[1.5%] h-[97%] rounded-full bg-gradient-to-tr from-blue-500 to-blue-500 z-5"></div>
+        <div className="absolute w-[97%] left-[3%] bottom-[1.5%] h-[97%] rounded-full bg-gradient-to-tr from-purple-500 to-blue-600 z-5"></div>
 
         {/* Big Circle Items */}
         {navItemsBig.map((item, index) => {
@@ -40,7 +40,7 @@ const Rotate = () => {
               <a href={`/${item.toLowerCase()}`} className="w-full h-full flex items-center justify-center ">
                 <IconComponent className='w-full h-full text-gray-300' />
               </a>
-              <p className='absolute bottom-8 text-right right-16 max-w-24  rounded-s-lg px-2  text-black bg-gradient-to-r to-blue-500 via-blue-500 from-blue-200 '> {item}</p>
+              <p className='absolute bottom-8 text-right right-16 max-w-24  rounded-s-lg px-2  text-black bg-gradient-to-r to-blue-500 via-purple-600 from-blue-200 '> {item}</p>
             </div>
           );
         })}

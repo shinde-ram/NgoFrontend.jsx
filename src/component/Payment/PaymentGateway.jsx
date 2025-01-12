@@ -36,12 +36,17 @@ function PaymentGateway() {
             body: JSON.stringify({ amount: amt }),
             credentials: "include",
           });
+          console.log(response);
+          
           const data = await response.json();
+          console.log(data);          
           const { id: orderId, currency: orderCurrency } = data;
           const imageResponse = await NgoService.getImage(id);
-          const imageURL = URL.createObjectURL(imageResponse.data);   
+          const imageURL = URL.createObjectURL(imageResponse.data);  
+          console.log("\nOrder is created now\n");
+           
           const options = {        
-            key: 'rzp_test_NpUkYCqHCHUJYH', // Your Razorpay key ID
+            key: 'rzp_test_zoz7pERHUhva0U', // Your Razorpay key ID
             amount: amt * 100, // Amount to be paid in paise
             currency: orderCurrency,
             name: '1SAATH',
@@ -83,11 +88,14 @@ function PaymentGateway() {
               color: '#F37254',
             },
           };
-    
+          console.log("\nAfter the order verification\n");
+          
           // Step 4: Initialize Razorpay and open the payment modal
           const rzp1 = new window.Razorpay(options);
           rzp1.open();
         } catch (error) {
+          console.log("Inside the error state of payment");
+          
           console.error('Error creating order:', error);
           alert('Payment failed to initiate.');
           navigate("/list/"+ngo.ngo_id);
