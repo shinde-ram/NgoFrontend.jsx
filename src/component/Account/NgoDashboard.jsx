@@ -75,7 +75,7 @@ const NgoDashboard = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 text-white p-6">
-            <div className="max-w-6xl mx-auto">
+            <div className=" mx-auto">
                 {/* Welcome Section */}
                 <div className="mb-6 md:flex justify-around items-center">
                     <div>
@@ -90,7 +90,7 @@ const NgoDashboard = () => {
                         className="w-full p-5 md:p-0 md:w-[30%]  object-contain  "
                     />
                 </div>
-                <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div className=" p-4 sm:p-6">
                     <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Description:</strong></p>
                     <p className={`text-sm sm:text-base ${isExpanded ? 'text-gray-700' : 'text-gray-500'}`}>
                         {isExpanded ? ngoDetails.description : ngoDetails.description.slice(0, 150)}
@@ -105,8 +105,9 @@ const NgoDashboard = () => {
                     )}
                 </div>
 
+                <div className="flex items-center justify-center ">
 
-                <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 p-6 sm:p-8 md:p-10 rounded-2xl shadow-lg max-w-5xl mx-auto mt-12">
+                <div className="w-[80%]  p-6 sm:p-8 md:p-10 rounded-2xl  max-w-5xl mx-auto mt-12">
                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 mb-6 sm:mb-8 text-center">Your Information</h3>
 
                     {/* Name and Description in the Same Row */}
@@ -185,14 +186,14 @@ const NgoDashboard = () => {
 
 
                 {/* Metrics and Info Section */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 mt-7">
+                <div className="w-[20%] flex flex-col gap-6 justify-center items-center ">
                     {/* Total Events */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col ">
                         <h3 className="text-xl font-semibold text-black text-center">Total Events</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             {ngoDetails.events.length}
                         </p>
-                        <button className="w-full md:w-1/2 whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/${ngoDetails.ngo_id}/events`)}>
+                        <button className="w-full  whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/${ngoDetails.ngo_id}/events`)}>
 
                             Manage All Events
                         </button>
@@ -204,7 +205,7 @@ const NgoDashboard = () => {
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             ₹{ngoDetails.total_donations || 0}
                         </p>
-                        <button className="w-full md:w-1/2 whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/donations/${ngoDetails.ngo_id}`)}>
+                        <button className="w-full whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/donations/${ngoDetails.ngo_id}`)}>
 
                             Edit Donation Info
                         </button>
@@ -217,11 +218,13 @@ const NgoDashboard = () => {
                             { ngoDetails.ngoFields.length }
 
                         </p>
-                        <button className="w-full md:w-1/2 whitespace-nowrap px-3 py-2 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/related-fields/${ngoDetails.ngo_id}`)}>
+                        <button className="w-full  whitespace-nowrap px-6 py-2 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/related-fields/${ngoDetails.ngo_id}`)}>
                             Edit Related Fields
                         </button>
                     </div>
                 </div>
+                </div>
+
 
 
                 {/* Logout Button */}

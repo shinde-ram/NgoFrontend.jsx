@@ -3,6 +3,7 @@ import { FaSignInAlt, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import UserService from "../../Service/UserService";
 import defaultProfile from "../../images/blankprofile.webp"; // Placeholder profile image
+import axios from "axios";
 
 function UserBtn() {
   const navigate = useNavigate();
@@ -16,11 +17,17 @@ function UserBtn() {
 
   const handleLogout = async () => {
     try {
-      await UserService.logout(); // Implement this method in your `UserService`
+      const response = await axios.post(
+        "http://localhost:8080/Profile/logout",
+        null, // No body is required for this request
+        {
+          withCredentials: true, // Send cookies/session data with the request
+        }
+      ); 
       setIsLoggedIn(false);
       setProfileImage(defaultProfile); // Reset profile image on logout
       setShowDropdown(false);
-      navigate("/login"); // Redirect to login page
+      navigate("/"); // Redirect to login page
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -60,7 +67,7 @@ function UserBtn() {
               className="h-16 w-16 rounded-full object-cover cursor-pointer transition duration-300 transform hover:scale-125 shadow-lg border-4 border-black"
               onClick={toggleDropdown}
             />
-            <p className="text-black mt-1">Profile</p>
+            <p className="text-white mt-1">Profile</p>
           </div>
 
           {/* Dropdown Menu */}
@@ -106,6 +113,8 @@ function UserBtn() {
                 </button>
               </>
             )}
+
+          
           </div>
         </div>
       </div>
