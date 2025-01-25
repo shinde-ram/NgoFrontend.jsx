@@ -4,6 +4,7 @@ import ScrollToTop from '../ScrollToTop';
 import NgoService from '../../Service/NgoService';
 import NgoFields from './NgoFields';
 import StarRating from './StarRating';
+import NgoImageSlider from './NgoImageSlider';
 
 function OneNgo() {
   const navigate = useNavigate()
@@ -103,6 +104,9 @@ function OneNgo() {
             {ngo.description}
           </p>
         </div>
+        <div className='w-full'>
+          <NgoImageSlider ngoId={ngo.ngo_id} />
+        </div>
         <NgoFields />
 
         <div className="mt-12 flex justify-center">
@@ -118,6 +122,7 @@ function OneNgo() {
           </div>
         </div>
         {/*add comments here*/}
+
 
       </div>
     </>

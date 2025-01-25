@@ -23,6 +23,7 @@ import EventEdit from './component/Account/EventEdit';
 import EditProfile from './component/Account/EditProfile';
 import EditRelatedField from './component/Account/EditRelatedField';
 import ViewDonation from './component/Account/ViewDonation';
+import GalleryEdit from './component/Account/GalleryEdit';
 
 function App() {
   const location = useLocation();
@@ -59,6 +60,7 @@ function App() {
           <Route path={`/ngo/edit-profile/:id`} element={<EditProfile/>}></Route>
           <Route path={`/ngo/related-fields/:id`} element={<EditRelatedField/>}></Route>
           <Route path={`/ngo/donations/:id`} element={<ViewDonation/>}></Route>
+          <Route path={`/ngo/gallery/:id`} element={<GalleryEdit/>}></Route>
 
 
           <Route path="*" element={<div>404 Not Found</div>} />

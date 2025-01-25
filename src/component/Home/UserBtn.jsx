@@ -57,7 +57,7 @@ function UserBtn() {
 
   return (
     <div className="relative">
-      <div className="flex mt-6 md:mt-0 md:mb-10">
+      <div className="flex mt-6 md:mt-0 md:mb-14">
         <div className="relative">
           {/* Profile Image */}
           <div className="flex flex-col items-center md:me-6">

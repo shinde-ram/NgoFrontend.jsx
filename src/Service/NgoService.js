@@ -55,14 +55,20 @@ getRelatedFields(ngoId){
   return axios.get(`${URL_PATH}/Field/${ngoId}`);
 }
 
-  
-  
+uploadGalleryImage(ngo_id, formData) {
+  return axios.post(`${URL_PATH}/gallery/upload/${ngo_id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
 
-  // Optional: Add other methods for updating, deleting, etc.
-  // Example for deleting an NGO
-  // deleteNgo(id) {
-  //   return axios.delete(`${URL_PATH}/${id}`);
-  // }
+getGalleryImages(ngo_id) {
+  return axios.get(`${URL_PATH}/gallery/${ngo_id}`);
+}
+
+
+
 
   // Example for updating an NGO
   updateNgo(id, ngo) {

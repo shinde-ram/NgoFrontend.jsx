@@ -33,7 +33,7 @@ const Hero = () => {
     <div className="h-full md:h-screen flex flex-col md:flex-row items-center relative"> 
       {/* Background Image Layer */}
       <div 
-        className="absolute inset-0 w-full h-full opacity-15 "
+        className="absolute inset-0 w-full h-full opacity-20 "
         style={{
           backgroundImage: `url(${currentImage})`,
           backgroundSize: "cover",
@@ -81,11 +81,8 @@ const Hero = () => {
       </div>
 
       {/* Main content area */}
-<<<<<<< Updated upstream
       <div className="w-full flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-blue-500 via-purple-600 to-blue-500 pt-[35%] md:pt-0">
-=======
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-between pt-[35%] md:pt-0 ">
->>>>>>> Stashed changes
         {/* Left Side - NGO Info */}
         <div className="text-white flex flex-col justify-center items-center w-full sm:w-[80%] px-8 md:px-20 md:w-1/2 ">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 md:text-left  ">
@@ -143,6 +140,7 @@ const Hero = () => {
         </div>
 
       </div>
+    </div>
     </div>
   );
 };

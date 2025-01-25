@@ -64,23 +64,23 @@ function Reviews() {
           {reviews.map((rev, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row justify-center items-center px-4 md:px-20 lg:px-32"
+              className="flex flex-col lg:flex-row justify-center items-center px-4 md:px-20 lg:px-32"
             >
               <div className="flex justify-center items-center mb-6 md:mb-0 md:mr-16 w-[40%]">
                 <img
                   src={`${rev.Image}`}
                   alt={rev.Name}
-                  className="h-[150px] w-[150px] md:h-[200px] md:w-[200px] lg:h-[350px] lg:max-w-[250px] rounded-full object-cover "
+                  className="h-[80px] w-[80px] md:h-[150px] md:w-[150px] lg:h-[150px] lg:max-w-[150px] rounded-full object-contain "
                 />
               </div>
 
 
               {/* Text Section */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left w-[60%]">
-                <p className="text-gray-700 text-lg md:text-xl italic mb-4 line-clamp-3 md:line-clamp-none">
+              <div className="flex flex-col items-center text-center w-full">
+                <p className="text-gray-700 text-lg md:text-xl italic mb-4 line-clamp-3 md:line-clamp-6">
                   {rev.descr}
                 </p>
-                <p className="text-gray-900 font-bold text-base md:text-lg">
+                <p className="text-gray-900 font-bold text-base md:text-lg ">
                   — {rev.Name}
                 </p>
               </div>

@@ -17,6 +17,7 @@ const NgoDashboard = () => {
         const fetchNgo = async () => {
             try {
                 const response = await NgoService.getNgoById(id);
+                
                 setNgoDetails(response.data);
                 // Fetch the image
                 const imageResponse = await NgoService.getImage(id);
@@ -90,7 +91,8 @@ const NgoDashboard = () => {
                         className="w-full p-5 md:p-0 md:w-[30%]  object-contain  "
                     />
                 </div>
-                <div className=" p-4 sm:p-6">
+                <div className=" p-4 sm:p-6 flex justify-center items-start">
+                    <div className="w-[90%]">
                     <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Description:</strong></p>
                     <p className={`text-sm sm:text-base ${isExpanded ? 'text-gray-700' : 'text-gray-500'}`}>
                         {isExpanded ? ngoDetails.description : ngoDetails.description.slice(0, 150)}
@@ -103,6 +105,17 @@ const NgoDashboard = () => {
                             {isExpanded ? "Show Less" : "Read More..."}
                         </p>
                     )}
+
+                    </div>
+ {/* Logout Button */}
+ <div className=" ">
+                    <button
+                        onClick={() => setShowLogoutModal(true)} // Show the modal
+                        className="w-full md:w-auto p-3 bg-red-500 hover:bg-red-600 text-black font-semibold rounded-lg transition-colors text-center"
+                    >
+                        Logout
+                    </button>
+                </div>
                 </div>
 
                 <div className="flex items-center justify-center ">
@@ -186,9 +199,9 @@ const NgoDashboard = () => {
 
 
                 {/* Metrics and Info Section */}
-                <div className="w-[20%] flex flex-col gap-6 justify-center items-center ">
+                <div className="w-[20%] flex md:flex-col gap-6 justify-center items-center ">
                     {/* Total Events */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col ">
+                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col ">
                         <h3 className="text-xl font-semibold text-black text-center">Total Events</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             {ngoDetails.events.length}
@@ -200,7 +213,7 @@ const NgoDashboard = () => {
                     </div>
 
                     {/* Total Donations */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
                         <h3 className="text-xl font-semibold text-black text-center">Total Donations</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             ₹{ngoDetails.total_donations || 0}
@@ -212,7 +225,7 @@ const NgoDashboard = () => {
                     </div>
 
                     {/* Related Fields */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
                         <h3 className="text-xl font-semibold text-black text-center">Related Fields</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             { ngoDetails.ngoFields.length }
@@ -222,20 +235,23 @@ const NgoDashboard = () => {
                             Edit Related Fields
                         </button>
                     </div>
+
+                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                        <h3 className="text-xl font-semibold text-black text-center">Gallery</h3>
+                        <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
+                            { ngoDetails.images.length }
+
+                        </p>
+                        <button className="w-full  whitespace-nowrap px-6 py-2 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/gallery/${ngoDetails.ngo_id}`)}>
+                           View Gallery
+                        </button>
+                    </div>
                 </div>
                 </div>
 
 
 
-                {/* Logout Button */}
-                <div className="mt-8">
-                    <button
-                        onClick={() => setShowLogoutModal(true)} // Show the modal
-                        className="w-full md:w-auto p-3 bg-red-500 hover:bg-red-600 text-black font-semibold rounded-lg transition-colors text-center"
-                    >
-                        Logout
-                    </button>
-                </div>
+               
 
                 {/* Logout Confirmation Modal */}
                 {showLogoutModal && (

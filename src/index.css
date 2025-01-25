@@ -53,7 +53,8 @@
     animation: fillLine 2s ease forwards;
     background: linear-gradient(to right, #ff9a9e, #fad0c4);
   }
-  
+
+
   
 
 @tailwind base;
