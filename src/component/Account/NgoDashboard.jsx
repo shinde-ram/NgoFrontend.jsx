@@ -11,6 +11,7 @@ const NgoDashboard = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [imageSrc, setImageSrc] = useState(null); // State for image source
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [DonationAmt,setDonationAmt] = useState(0);
 
 
     useEffect(() => {
@@ -22,7 +23,9 @@ const NgoDashboard = () => {
                 // Fetch the image
                 const imageResponse = await NgoService.getImage(id);
                 const imageURL = URL.createObjectURL(imageResponse.data); // Create URL from blob
-                setImageSrc(imageURL); // Set the image URL as the source for the image
+                setImageSrc(imageURL); // Set the image URL as the source for the image'
+                const res = await NgoService.getTotalDonation(id);
+                setDonationAmt(res.data);
             } catch (error) {
                 console.error("Error fetching NGO details:", error);
                 navigate("/login");
@@ -75,27 +78,38 @@ const NgoDashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 text-white p-6">
+        <div className="min-h-screen bg-gradient-to-r from-blue-300 to-blue-300  p-6">
             <div className=" mx-auto">
                 {/* Welcome Section */}
                 <div className="mb-6 md:flex justify-around items-center">
-                    <div>
+                    <div className="w-1/2">
                         <h1 className="text-3xl sm:text-4xl text-center font-bold text-black mb-4">
                             {ngoDetails.name}
                         </h1>
                         <p className="text-black text-center font-semibold">Since : <span className="text-gray-500">{ngoDetails.founded_on.slice(0, 4)}</span></p>
                     </div>
+                    <div className="w-1/2 flex justify-center">
                     <img
                         src={imageSrc} // Set the fetched image blob URL here
                         alt={ngoDetails.name}
                         className="w-full p-5 md:p-0 md:w-[30%]  object-contain  "
                     />
+                     {/* Logout Button */}
+ <div className=" fixed top-5 right-5 ">
+                    <button
+                        onClick={() => setShowLogoutModal(true)} // Show the modal
+                        className="w-full md:w-auto p-3 bg-red-500 hover:bg-red-600 text-black font-semibold rounded-lg transition-colors text-center"
+                    >
+                        Logout
+                    </button>
+                </div>
+                    </div>
                 </div>
                 <div className=" p-4 sm:p-6 flex justify-center items-start">
                     <div className="w-[90%]">
-                    <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Description:</strong></p>
-                    <p className={`text-sm sm:text-base ${isExpanded ? 'text-gray-700' : 'text-gray-500'}`}>
-                        {isExpanded ? ngoDetails.description : ngoDetails.description.slice(0, 150)}
+                    <p className="text-base sm:text-lg font-medium text-black mb-2"><strong>Description:</strong></p>
+                    <p className={`text-sm sm:text-base ${isExpanded ? 'text-black' : 'text-black'}`}>
+                        {isExpanded ? ngoDetails.description : ngoDetails.description.slice(0, 500)}
                     </p>
                     {ngoDetails.description.length > 150 && (
                         <p
@@ -107,38 +121,57 @@ const NgoDashboard = () => {
                     )}
 
                     </div>
- {/* Logout Button */}
- <div className=" ">
-                    <button
-                        onClick={() => setShowLogoutModal(true)} // Show the modal
-                        className="w-full md:w-auto p-3 bg-red-500 hover:bg-red-600 text-black font-semibold rounded-lg transition-colors text-center"
-                    >
-                        Logout
-                    </button>
-                </div>
+
                 </div>
 
-                <div className="flex items-center justify-center ">
+                <div className="flex items-cener justify-center ">
+                    {/* Metrics and Info Section */}
+                <div className="w-[20%] flex md:flex-col gap-6 justify-center items-center ">
+                    {/* Total Events */}
+                    <div className="bg-violet-200 w-full p-6 rounded-lg shadow-lg flex flex-col ">
+                        <h3 className="text-xl font-semibold text-black text-center">Total Events</h3>
+                        <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
+                            {ngoDetails.events.length}
+                        </p>
+                        <button className="w-full  whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/${ngoDetails.ngo_id}/events`)}>
 
-                <div className="w-[80%]  p-6 sm:p-8 md:p-10 rounded-2xl  max-w-5xl mx-auto mt-12">
+                            Manage All Events
+                        </button>
+                    </div>
+
+                    {/* Total Donations */}
+                    <div className="bg-violet-200 w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                        <h3 className="text-xl font-semibold text-black text-center">Total Donations</h3>
+                        <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
+                            ₹{DonationAmt}
+                        </p>
+                        <button className="w-full whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/donations/${ngoDetails.ngo_id}`)}>
+
+                            Edit Donation Info
+                        </button>
+                    </div>
+
+                </div>
+
+                <div className="w-[60%]  p-6 sm:p-8 md:p-10 rounded-2xl  max-w-5xl mx-auto mt-2">
                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 mb-6 sm:mb-8 text-center">Your Information</h3>
 
                     {/* Name and Description in the Same Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb- sm:mb-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-1">
                         {/* Name Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 sm:mb-8">
+                        <div className="bg-blue-200 p-4 sm:p-6 border-b-2 border-black ">
                             <p className="sm:text-lg font-medium text-gray-700 mb-2"><strong>Name</strong></p>
-                            <p className="text-lg sm:text-xl text-gray-700 ">{ngoDetails.name}</p>
+                            <p className="text-lg sm:text-md text-gray-700 ">{ngoDetails.name}</p>
                         </div>
 
                         {/* Location Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 mb-6 sm:mb-8">
-                            <p className="sm:text-lg font-medium text-gray-700 mb-2"><strong>Location</strong></p>
+                        <div className="bg-blue-200 p-4 sm:p-6 overflow-hidden border-b-2 border-black">
+                            <p className="sm:text-lg font-medium text-gray-700 "><strong>Location</strong></p>
                             <a
                                 href={ngoDetails.location_link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-500 hover:text-blue-600 transition duration-200 text-xs sm:text-sm md:text-lg"
+                                className="text-blue-500 text-xs sm:text-sm md:text-lg"
                             >
                                 {ngoDetails.location_link}
                             </a>
@@ -146,36 +179,36 @@ const NgoDashboard = () => {
                     </div>
 
                     {/* Email and Phone in the Same Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2  border-b-2 border-black">
                         {/* Email Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Email</strong></p>
+                        <div className="bg-blue-200 p-4 sm:p-6  ">
+                            <p className="text-base sm:text-lg font-medium text-gray-700 mb-2 "><strong>Email</strong></p>
                             <p className="text-lg sm:text-xl text-gray-900">{ngoDetails.email}</p>
                         </div>
 
                         {/* Phone Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                            <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Phone</strong></p>
+                        <div className="bg-blue-200 p-4 sm:p-6   ">
+                            <p className="text-base sm:text-lg font-medium text-gray-700 "><strong>Phone</strong></p>
                             <p className="text-lg sm:text-xl text-gray-900">{ngoDetails.phone}</p>
                         </div>
                     </div>
 
                     {/* Address and Website in the Same Row */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-1  mb-6 sm:mb-8 ">
                         {/* Address Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="bg-blue-200 p-4 sm:p-6 border-b-2 border-black">
                             <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Address</strong></p>
-                            <p className="text-lg sm:text-xl text-gray-900">{ngoDetails.address}</p>
+                            <p className="text-lg sm:text-xl text-black">{ngoDetails.address}</p>
                         </div>
 
                         {/* Website Block */}
-                        <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                        <div className="bg-blue-200 p-4 sm:p-6  shadow-md ">
                             <p className="text-base sm:text-lg font-medium text-gray-700 mb-2"><strong>Website</strong></p>
                             <a
                                 href={ngoDetails.website}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-500 hover:text-blue-600 transition duration-200 text-lg sm:text-xl"
+                                className="text-blue-500 text-lg sm:text-xl"
                             >
                                 {ngoDetails.website}
                             </a>
@@ -200,32 +233,10 @@ const NgoDashboard = () => {
 
                 {/* Metrics and Info Section */}
                 <div className="w-[20%] flex md:flex-col gap-6 justify-center items-center ">
-                    {/* Total Events */}
-                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col ">
-                        <h3 className="text-xl font-semibold text-black text-center">Total Events</h3>
-                        <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
-                            {ngoDetails.events.length}
-                        </p>
-                        <button className="w-full  whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/${ngoDetails.ngo_id}/events`)}>
-
-                            Manage All Events
-                        </button>
-                    </div>
-
-                    {/* Total Donations */}
-                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
-                        <h3 className="text-xl font-semibold text-black text-center">Total Donations</h3>
-                        <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
-                            ₹{ngoDetails.total_donations || 0}
-                        </p>
-                        <button className="w-full whitespace-nowrap py-2 px-6 bg-blue-500 text-white font-semibold text-lg sm:text-sm rounded-lg hover:bg-blue-600 transition duration-300" onClick={() => navigate(`/ngo/donations/${ngoDetails.ngo_id}`)}>
-
-                            Edit Donation Info
-                        </button>
-                    </div>
+                   
 
                     {/* Related Fields */}
-                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <div className="bg-violet-200 w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
                         <h3 className="text-xl font-semibold text-black text-center">Related Fields</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             { ngoDetails.ngoFields.length }
@@ -236,7 +247,7 @@ const NgoDashboard = () => {
                         </button>
                     </div>
 
-                    <div className="bg-white w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
+                    <div className="bg-violet-200 w-full p-6 rounded-lg shadow-lg flex flex-col justify-center items-center">
                         <h3 className="text-xl font-semibold text-black text-center">Gallery</h3>
                         <p className="text-3xl font-bold text-purple-500 text-center  py-3" >
                             { ngoDetails.images.length }

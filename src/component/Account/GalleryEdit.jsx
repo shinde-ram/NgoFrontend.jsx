@@ -72,11 +72,12 @@ const GalleryEdit = () => {
         {images.map((image) => (
           <div key={image.id} className="relative p-2">
             <img
-              src={`http://localhost:8080${image.imagePath}`}
+            src={`http://localhost:8080${image.imagePath}`}
+            
               alt={image.imageName}
               className="w-full h-full object-contain rounded-lg"
             />
-            {/* Delete Button */}
+            {/* Delete Button */console.log(image.imagePath)   }
             <button
               onClick={() => handleDelete(image.id)}
               className="absolute bottom-2 right-2 bg-red-600 text-white p-1 rounded-xl text-xs"

@@ -34,13 +34,14 @@ const NgoImageSlider = ({ ngoId }) => {
           animation: `scroll ${images.length * (images.length < 3 ? 8 : 3)}s linear infinite`,
         }}
       >
-        {/* Display images once */}
+{        console.log(images)
+}        {/* Display images once */}
         {images.map((image, index) => (
           <img
-            key={index}
-            src={`http://localhost:8080${image.imagePath}`}
-            alt={image.imageName}
-            className="w-40 h-40 mx-2 object-cover rounded-lg"
+          key={index}
+          src={`http://localhost:8080${image.imagePath}`}
+          alt={image.imageName}
+          className="w-40 h-40 mx-2 object-cover rounded-lg"
           />
         ))}
       </div>

@@ -8,7 +8,19 @@ class NgoService {
     return axios.get(URL_PATH);
   }
 
+
+  getTotalDonation(id){
+    return axios.get(`${URL_PATH}/Transactions/total_donation/${id}`);
+  }
+
+  getDonations(id){
+    console.log("thus ykuug"+id );
+
+    return axios.get(`${URL_PATH}/Transactions/donationDetails/${id}`);
+  }
+
   getImage(id) {
+    
     return axios.get(`${URL_PATH}/getprofileimage/${id}`, { responseType: 'blob' });
   }
 

@@ -70,7 +70,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An unexpected error occurred. Please try again.");
+      alert("Invalid Login Credentials. Please login again.");
     }
   };
 

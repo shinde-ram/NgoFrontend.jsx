@@ -57,7 +57,7 @@ const CountNgo = () => {
   useEffect(() => {
     if (isVisible) {
       animateValue(0, 100, 2000, setNgoCount);
-      animateValue(0, 200, 2000, setUserCount);
+      animateValue(0, 300, 2000, setUserCount);
     }
   }, [isVisible]);
 
